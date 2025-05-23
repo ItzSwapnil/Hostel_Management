@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Add/Edit Complaint - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">{{ 'Edit' if complaint else 'Add' }} Complaint</h2>
+<form method="post">
+  <div class="mb-3">
+    <label for="student_id" class="form-label">Student ID</label>
+    <input type="number" class="form-control" id="student_id" name="student_id" value="{{ complaint.student_id if complaint else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" id="description" name="description" required>{{ complaint.description if complaint else '' }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <select class="form-select" id="status" name="status">
+      <option value="Pending" {% if complaint and complaint.status == 'Pending' %}selected{% endif %}>Pending</option>
+      <option value="Resolved" {% if complaint and complaint.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-success">{{ 'Update' if complaint else 'Add' }}</button>
+  <a href="/complaints" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
+

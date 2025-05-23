@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Students - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">Students</h2>
+<a href="/students/add" class="btn btn-primary mb-3">Add Student</a>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Course</th>
+      <th>Hostel</th>
+      <th>Room</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td>{{ s.id }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.email }}</td>
+      <td>{{ s.course }}</td>
+      <td>{{ s.hostel_id }}</td>
+      <td>{{ s.room_id }}</td>
+      <td>
+        <a href="/students/edit/{{ s.id }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="/students/delete/{{ s.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this student?');">Delete</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7">No students found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

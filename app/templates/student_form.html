@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Add/Edit Student - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">{{ 'Edit' if student else 'Add' }} Student</h2>
+<form method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{ student.name if student else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{ student.email if student else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="course" class="form-label">Course</label>
+    <input type="text" class="form-control" id="course" name="course" value="{{ student.course if student else '' }}">
+  </div>
+  <div class="mb-3">
+    <label for="hostel_id" class="form-label">Hostel</label>
+    <select class="form-select" id="hostel_id" name="hostel_id" required>
+      <option value="">Select Hostel</option>
+      {% for h in hostels %}
+      <option value="{{ h.id }}" {% if student and student.hostel_id == h.id %}selected{% endif %}>{{ h.name }} ({{ h.type }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="room_id" class="form-label">Room</label>
+    <select class="form-select" id="room_id" name="room_id" required>
+      <option value="">Select Room</option>
+      {% for r in rooms %}
+      <option value="{{ r.id }}" {% if student and student.room_id == r.id %}selected{% endif %}>
+        {{ r.room_number }} (Hostel: {{ r.hostel_id }}, Beds: {{ r.bed_count - r.occupied_beds }} available)
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-success">{{ 'Update' if student else 'Add' }}</button>
+  <a href="/students" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
+

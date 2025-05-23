@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Add/Edit Room - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">{{ 'Edit' if room else 'Add' }} Room</h2>
+<form method="post">
+  <div class="mb-3">
+    <label for="room_number" class="form-label">Room Number</label>
+    <input type="text" class="form-control" id="room_number" name="room_number" value="{{ room.room_number if room else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="hostel_id" class="form-label">Hostel ID</label>
+    <input type="number" class="form-control" id="hostel_id" name="hostel_id" value="{{ room.hostel_id if room else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="bed_count" class="form-label">Bed Count</label>
+    <input type="number" class="form-control" id="bed_count" name="bed_count" value="{{ room.bed_count if room else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="occupied_beds" class="form-label">Occupied Beds</label>
+    <input type="number" class="form-control" id="occupied_beds" name="occupied_beds" value="{{ room.occupied_beds if room else 0 }}" required>
+  </div>
+  <button type="submit" class="btn btn-success">{{ 'Update' if room else 'Add' }}</button>
+  <a href="/rooms" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+@startuml
+actor Admin
+actor Student
+
+Admin --> (Manage Hostels)
+Admin --> (Manage Rooms)
+Admin --> (Manage Students)
+Admin --> (Resolve Complaints)
+Admin --> (View Dashboard)
+Student --> (Register/Login)
+Student --> (View Hostels/Rooms)
+Student --> (Submit Complaint)
+Student --> (View Own Complaints)
+@enduml

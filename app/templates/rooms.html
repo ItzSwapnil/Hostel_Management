@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Rooms - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">Rooms</h2>
+<a href="/rooms/add" class="btn btn-primary mb-3">Add Room</a>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Room Number</th>
+      <th>Hostel</th>
+      <th>Bed Count</th>
+      <th>Occupied Beds</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rooms %}
+    <tr>
+      <td>{{ r.id }}</td>
+      <td>{{ r.room_number }}</td>
+      <td>{{ r.hostel_id }}</td>
+      <td>{{ r.bed_count }}</td>
+      <td>{{ r.occupied_beds }}</td>
+      <td>
+        <a href="/rooms/edit/{{ r.id }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="/rooms/delete/{{ r.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this room?');">Delete</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">No rooms found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

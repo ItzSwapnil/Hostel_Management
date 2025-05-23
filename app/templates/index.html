@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Welcome - Hostel Management{% endblock %}
+{% block content %}
+<div class="text-center mt-5">
+    <h1>Welcome to the Hostel Management System</h1>
+    <p class="lead">Manage students, rooms, hostels, and complaints easily.</p>
+    {% if not session.get('user_id') %}
+    <a href="/login" class="btn btn-primary">Login</a>
+    {% else %}
+    <a href="/dashboard" class="btn btn-success">Go to Dashboard</a>
+    {% endif %}
+</div>
+{% endblock %}
+

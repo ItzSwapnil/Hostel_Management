@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Complaints - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">Complaints</h2>
+<a href="/complaints/add" class="btn btn-primary mb-3">Add Complaint</a>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Student</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Timestamp</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in complaints %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.student_id }}</td>
+      <td>{{ c.description }}</td>
+      <td>{{ c.status }}</td>
+      <td>{{ c.timestamp.strftime('%Y-%m-%d %H:%M') if c.timestamp else '' }}</td>
+      <td>
+        <a href="/complaints/edit/{{ c.id }}" class="btn btn-sm btn-warning">Edit</a>
+        <a href="/complaints/delete/{{ c.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this complaint?');">Delete</a>
+        {% if session.get('role') == 'admin' and c.status != 'Resolved' %}
+        <a href="/complaints/resolve/{{ c.id }}" class="btn btn-sm btn-success">Resolve</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6">No complaints found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

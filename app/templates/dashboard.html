@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - Hostel Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-bg-primary mb-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">Students</h5>
+        <p class="card-text display-6">{{ stats.total_students }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-success mb-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">Hostels</h5>
+        <p class="card-text display-6">{{ stats.total_hostels }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-warning mb-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">Rooms</h5>
+        <p class="card-text display-6">{{ stats.total_rooms }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-danger mb-3">
+      <div class="card-body text-center">
+        <h5 class="card-title">Complaints</h5>
+        <p class="card-text display-6">{{ stats.total_complaints }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h4>Recent Complaints</h4>
+    <table class="table table-bordered table-sm">
+      <thead><tr><th>ID</th><th>Student</th><th>Status</th><th>Time</th></tr></thead>
+      <tbody>
+        {% for c in recent_complaints %}
+        <tr>
+          <td>{{ c.id }}</td>
+          <td>{{ c.student_id }}</td>
+          <td>{{ c.status }}</td>
+          <td>{{ c.timestamp.strftime('%Y-%m-%d %H:%M') if c.timestamp else '' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No complaints</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <h4>Available Rooms</h4>
+    <table class="table table-bordered table-sm">
+      <thead><tr><th>Room</th><th>Hostel</th><th>Available Beds</th></tr></thead>
+      <tbody>
+        {% for r in available_rooms %}
+        <tr>
+          <td>{{ r.room_number }}</td>
+          <td>{{ r.hostel_id }}</td>
+          <td>{{ r.bed_count - r.occupied_beds }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">No available rooms</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
