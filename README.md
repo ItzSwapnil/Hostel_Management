@@ -13,7 +13,7 @@ A modern, full-featured hostel management system built with Flask. It supports s
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ItzSwapnil/Hostel_Management/tree/master
 cd Hostel_Management
 ```
 
@@ -22,7 +22,15 @@ cd Hostel_Management
 python -m venv .venv
 .venv\Scripts\activate  # On Windows
 pip install -r requirements/prod.txt
+pip install -r requirements/dev.txt
 ```
+    For UV 
+```bash
+uv venv venv
+uv pip install -r requirements/prod.txt
+uv pip install -r requirements/dev.txt
+```
+
 
 ### 3. Configure environment variables
 Create a `.env` file in the root directory:
